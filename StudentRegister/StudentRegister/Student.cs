@@ -10,14 +10,31 @@ namespace StudentRegister
     /// <summary>
     /// A class representing a student
     /// </summary>
-    public class Student
+    public class Student :INotifyPropertyChanged
     {
         private List<CourseResult> courseHistory;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private void NotifyPropertyChanged()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("GPA"));
+
+        }
         /// <summary>
         /// Gets and sets the first name
         /// </summary>
-        public string First { get; set; }
+        public string First {
+            get
+            {
+                return First;
+            }
+            set
+            {
+                First = value;
+                NotifyPropertyChanged();
+                    }
+        }
 
         /// <summary>
         /// Gets and sets the last name
@@ -85,6 +102,14 @@ namespace StudentRegister
             Last = last;
             courseHistory = new List<CourseResult>();
         }
+        public override string ToString()
+        {
+            return $"{Last}, {First}, ({GPA})";
+        }
+        public void CouseComplete(String n,uint h,Grade g,string s) {
+            this.courseHistory.Add(new CourseResult(n, h, g, s));
 
+            //the ? means that if this value is null dont do any thing and if its not u can do
+        }
     }
 }

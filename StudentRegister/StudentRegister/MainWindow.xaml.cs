@@ -14,7 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 
-namespace StudentRegister
+namespace StudentRegister 
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -29,6 +29,14 @@ namespace StudentRegister
             students = new List<Student>();
             students.Add(new Student("Jack", "Nimble"));
             students.Add(new Student("Mary", "Contrary"));
+            StudentList.ItemsSource = students;
+            SelectedStudent.Content = students;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            students[1].CouseComplete("test",2,Grade.A,"ss");
         }
     }
 }
